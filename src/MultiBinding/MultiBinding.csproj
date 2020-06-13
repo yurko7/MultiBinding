@@ -6,7 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>YuKu.MultiBinding</AssemblyName>
     <RootNamespace>YuKu.Windows.Forms</RootNamespace>
-    <Nullable>Enable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
