@@ -23,7 +23,7 @@ namespace WindowsFormsApp
             multiBinding.AddBinding(checkBox2, nameof(CheckBox.Checked));
             multiBinding.AddBinding(checkBox3, nameof(CheckBox.Checked));
             multiBinding.Format += (sender, args) => args.Value = ((Object[]) args.Value).Cast<Boolean?>().All(value => value ?? false);
-            multiBinding.AddTo(button1);
+            button1.DataBindings.AddMultiBinding(multiBinding);
         }
 
         private void InitializeColorBinding()
@@ -45,7 +45,7 @@ namespace WindowsFormsApp
                 var color = (Color) args.Value;
                 args.Value = new Object[] {color.R.ToString(), color.G.ToString(), color.B.ToString()};
             };
-            multiBinding.AddTo(pictureBox);
+            pictureBox.DataBindings.AddMultiBinding(multiBinding);
         }
 
         private void pictureBox_Click(Object sender, EventArgs e)

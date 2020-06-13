@@ -28,7 +28,7 @@ multiBinding.AddBinding(textBoxB, nameof(TextBox.Text));
 multiBinding.Format += (sender, args) => args.Value = ((Object[]) args.Value).Cast<String>().All(value => !String.IsNullOrEmpty(value));
 
 // Add multi-binding to the button
-multiBinding.AddTo(button);
+multiBinding.AddTo(button.DataBindings);
 ```
 
 More examples can be found in the [demo-project](demos/WindowsFormsApp).

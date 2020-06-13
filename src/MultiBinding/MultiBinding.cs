@@ -40,20 +40,20 @@ namespace YuKu.Windows.Forms
             Hub.RemoveBinding(binding);
         }
 
-        public void AddTo(Control control)
+        public void AddTo(ControlBindingsCollection dataBindings)
         {
-            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (dataBindings == null) throw new ArgumentNullException(nameof(dataBindings));
 
-            control.Controls.Add(Hub);
-            control.DataBindings.Add(this);
+            dataBindings.Control.Controls.Add(Hub);
+            dataBindings.Add(this);
         }
 
-        public void RemoveFrom(Control control)
+        public void RemoveFrom(ControlBindingsCollection dataBindings)
         {
-            if (control == null) throw new ArgumentNullException(nameof(control));
+            if (dataBindings == null) throw new ArgumentNullException(nameof(dataBindings));
 
-            control.DataBindings.Remove(this);
-            control.Controls.Remove(Hub);
+            dataBindings.Remove(this);
+            dataBindings.Control.Controls.Remove(Hub);
         }
 
         private BindingsHub Hub => (BindingsHub) DataSource;
