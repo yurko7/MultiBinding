@@ -10,15 +10,18 @@ namespace YuKu.Windows.Forms
     {
         private sealed partial class BindingsHub : Control, ICustomTypeDescriptor, INotifyPropertyChanged
         {
+            static BindingsHub()
+            {
+                PropertyDescriptorCollection defaultProperties = TypeDescriptor.GetProperties(typeof(BindingsHub));
+                StaticProperties = new[]
+                {
+                    defaultProperties[nameof(DataValues)]
+                };
+            }
+
             public BindingsHub()
             {
-                PropertyDescriptorCollection defaultProperties = TypeDescriptor.GetProperties(this, true);
-                _staticProperties = new[]
-                {
-                    defaultProperties.Find(nameof(DataValues), false)
-                };
                 _dynamicProperties = new Dictionary<String, PropertyDescriptor>();
-
                 DataBindings.CollectionChanged += DataBindingsCollectionChanged;
             }
 
@@ -91,7 +94,7 @@ namespace YuKu.Windows.Forms
 
             PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
             {
-                PropertyDescriptor[] properties = _staticProperties.Concat(_dynamicProperties.Values).ToArray();
+                PropertyDescriptor[] properties = StaticProperties.Concat(_dynamicProperties.Values).ToArray();
                 return new PropertyDescriptorCollection(properties, true);
             }
 
@@ -155,7 +158,7 @@ namespace YuKu.Windows.Forms
                 return propertyName;
             }
 
-            private readonly PropertyDescriptor[] _staticProperties;
+            private static readonly PropertyDescriptor[] StaticProperties;
             private readonly Dictionary<String, PropertyDescriptor> _dynamicProperties;
         }
     }
